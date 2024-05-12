@@ -5,10 +5,6 @@ var my_email = null
 // the name of the file for the resulting stats
 var result_file = null
 
-function ts_to_sec(timestamp) {
-  return Math.floor(timestamp / 1000);
-}
-
 function main() {
   console.log("init values")
   if (my_email == null || result_file == null) {
@@ -105,4 +101,14 @@ function main() {
   propertiesStore.setProperty("nr_threads", nr_threads.toString())
   propertiesStore.setProperty("summary", JSON.stringify(summary))
   console.log("total exec time: " + ts_to_sec(format_ss - init))
+}
+
+function ts_to_sec(timestamp) {
+  return Math.floor(timestamp / 1000);
+}
+
+function reset_all_counters() {
+    console.warn("Deleting all script properties - reset all known counters");
+    let property_store = PropertiesService.getUserProperties()
+    property_store.deleteAllProperties()
 }
